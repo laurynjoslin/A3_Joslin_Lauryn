@@ -12,7 +12,12 @@ knitr::opts_chunk$set(echo = TRUE)
 ## R Markdown
 
 ```{r}
-setwd("/Users/LaurynJoslin/Desktop/A3_Joslin_Lauryn/InputData")
+getwd()
+```
+
+
+```{r}
+setwd("/Users/LaurynJoslin/Desktop/A3_Joslin_Lauryn_/InputData")
 dat <- read.csv("FallopiaData.csv")
 ```
 
@@ -26,6 +31,7 @@ library(dplyr)
 dat <- filter(dat, Total < 60)
 ```
 
+
 ```{r}
 #Reorder the columns so that they are in the order: ‘Total’, ‘Taxon’, ‘Senario’, ‘Nutrients’, and remove the other columns
 dat <- select(dat, Total, Taxon, Scenario, Nutrients)
@@ -37,7 +43,6 @@ head(dat)
 dat$TotalG <- dat$Total/1000
 dat <- select(dat, TotalG, Taxon, Scenario, Nutrients)
 ```
-
 
 ```{r}
 #Write a custom function that will take two inputs from the user: 1. a vector of data to #process (e.g. column from a data.frame object) and 2. a string that defines what calculation to perform.
@@ -98,9 +103,12 @@ myfun <- function(var1=dat$TotalG, var2=Average){
 ```
 
 
-
 ```{r}
 #Write (i.e. save) the new data to a file called "WrangledData.csv" in the Output folder.
-write(WrangledData.csv, "/Users/LaurynJoslin/Desktop/A3_Joslin_Lauryn/Output")
+dat <- "WrangledData.csv"
+write.table(WrangledData.csv, file = "/Users/LaurynJoslin/Desktop/A3_Joslin_Lauryn_/Output")
 ```
+
+
+
 
