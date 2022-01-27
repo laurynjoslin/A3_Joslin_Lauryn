@@ -1,0 +1,106 @@
+---
+title: "A3_Joslin_Lauryn_"
+author: "Lauryn Joslin"
+date: "26/01/2022"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## R Markdown
+
+```{r}
+setwd("/Users/LaurynJoslin/Desktop/A3_Joslin_Lauryn/InputData")
+dat <- read.csv("FallopiaData.csv")
+```
+
+```{r}
+library(dplyr)
+```
+
+
+```{r}
+#Remove rows with ‘Total’ biomass < 60
+dat <- filter(dat, Total < 60)
+```
+
+```{r}
+#Reorder the columns so that they are in the order: ‘Total’, ‘Taxon’, ‘Senario’, ‘Nutrients’, and remove the other columns
+dat <- select(dat, Total, Taxon, Scenario, Nutrients)
+head(dat)
+```
+
+```{r}
+#Make a new column TotalG, which converts the ‘Total’ column from mg to grams AND replace Total with TotalG, and add it to the dataset.
+dat$TotalG <- dat$Total/1000
+dat <- select(dat, TotalG, Taxon, Scenario, Nutrients)
+```
+
+
+```{r}
+#Write a custom function that will take two inputs from the user: 1. a vector of data to #process (e.g. column from a data.frame object) and 2. a string that defines what calculation to perform.
+#if string #2 is "Average" then calculate the average value for the column named in vector #1
+#if string #2 is "Sum" then calculate the sum of values for the column named in vector #1
+#if string #2 is "Observations" then count the number of observed values for the column named in vector #1
+#if string #2 is anything else, then output an error to the user 
+
+
+myfun <- function(var1=dat$Scenario, var2= xyz){
+  if (var2 == Average){
+  Average <- Mean(var1)
+  }
+  if (var2 == Sum){
+  Sum <- sum(var1)
+  }
+  if (var2 == Observations){
+  Observations <- count(var1)
+  }
+  else {
+    print("Error")
+  }
+}
+#Write some R code that uses your function to count the total number of observations in the 'Taxon' column.
+
+myfun <- function(var1=dat$Taxon, var2=Observations){
+  if (var2 == Average){
+  Average <- Mean(var1)
+  }
+  if (var2 == Sum){
+  Sum <- sum(var1)
+  }
+  if (var2 == Observations){
+  Observations <- count(var1)
+  }
+  else {
+    print("Error")
+  }
+}
+
+#Write some R code that uses your function  to calculate the average TotalG for each of the two Nutrient concentrations
+
+myfun <- function(var1=dat$TotalG, var2=Average){
+  if (var2 == Average){
+  Average <- Mean(var1)
+  }
+  if (var2 == Sum){
+  Sum <- sum(var1)
+  }
+  if (var2 == Observations){
+  Observations <- count(var1)
+  }
+  else {
+    print("Error")
+  }
+}
+
+```
+
+
+
+```{r}
+#Write (i.e. save) the new data to a file called "WrangledData.csv" in the Output folder.
+write(WrangledData.csv, "/Users/LaurynJoslin/Desktop/A3_Joslin_Lauryn/Output")
+```
+
